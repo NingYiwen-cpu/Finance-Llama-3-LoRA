@@ -56,12 +56,12 @@
 ### 1. 环境安装
 请确保已安装 `LLaMA-Factory` 及其依赖：
 
-```bash
+
 git clone [https://github.com/hiyouga/LLaMA-Factory.git](https://github.com/hiyouga/LLaMA-Factory.git)
 cd LLaMA-Factory
 pip install -r requirements.txt
 
-### 2. 数据准备 (Data Preparation)
+###  2. 数据准备 (Data Preparation)
 
 [cite_start]请将处理好的 `datasets_finance.json` 数据集文件放置在 `data/` 目录下，并修改 `data/dataset_info.json` 文件以注册新的数据集 [cite: 47]。
 
@@ -69,16 +69,16 @@ pip install -r requirements.txt
 
 [cite_start]使用以下命令启动 LoRA 微调。为了优化下载速度，环境配置中启用了 ModelScope Hub 加速 [cite: 68]。
 
-```bash
-# 启用 ModelScope Hub 加速（可选）
+
+### 启用 ModelScope Hub 加速（可选）
 export USE_MODELSCOPE_HUB=1 
 
-# 启动训练脚本
+### 启动训练脚本
 llamafactory-cli train examples/train_lora/llama3_lora_sft.yaml
 
 ### 4. 模型合并 (Merge)
 训练完成后，为了将 LoRA 权重集成到基座模型中以进行独立部署，需执行模型合并与导出操作 [2]。
 
-```bash
+
 # 执行模型合并与导出
 llamafactory-cli export examples/merge_lora/llama3_lora_sft.yaml
