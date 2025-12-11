@@ -1,0 +1,11 @@
+# 针对原始基座模型进行推理
+# model_name_or_path: LLM-Research/Meta-Llama-3-8B-Instruct
+# 针对合并后的模型做推理
+model_name_or_path: /data/nyw/homework/LLM_LZC/LLaMA-Factory/output/llama3_lora_sft
+# 针对微调的lora模型进行推理
+# adapter_name_or_path: saves/llama3-8b/lora/sft
+template: llama3
+infer_backend: huggingface  # choices: [huggingface, vllm, sglang, ktransformers]
+trust_remote_code: true
+temperature: 0.1    # 调低温度，让回答更稳重
+top_p: 0.7          # 核采样阈值

@@ -1,0 +1,14 @@
+### model
+# 基于lora训练后的合并模型再做量化导出
+model_name_or_path: /data/nyw/homework/LLM_LZC/LLaMA-Factory/output/llama3_lora_sft
+template: llama3
+trust_remote_code: true
+
+### export
+export_dir: output/llama3_gptq
+export_quantization_bit: 4
+export_quantization_dataset: datasets_finance
+# export_quantization_dataset: data/c4_demo.jsonl
+export_size: 5
+export_device: cpu  # choices: [cpu, auto]
+export_legacy_format: false

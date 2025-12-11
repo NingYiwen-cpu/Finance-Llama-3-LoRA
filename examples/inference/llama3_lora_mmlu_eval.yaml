@@ -1,0 +1,15 @@
+model_name_or_path: /data/nyw/homework/LLM_LZC/LLaMA-Factory/output/llama3_lora_sft
+
+### 微调与任务配置 ###
+finetuning_type: lora
+eval_dataset: mmlu_en        # 任务名称
+template: fewshot      # MMLU 专用模板
+
+### 输出与环境 ###
+output_dir: saves/llama3-8b/lora/eval_mmlu
+overwrite_output_dir: true  
+per_device_eval_batch_size: 8          # 根据显存调整
+predict_with_generate: true
+
+stage: sft
+do_predict: true

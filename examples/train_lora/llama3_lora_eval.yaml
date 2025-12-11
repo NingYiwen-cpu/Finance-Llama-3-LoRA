@@ -1,0 +1,31 @@
+### model
+model_name_or_path: /data/nyw/homework/LLM_LZC/LLaMA-Factory/output/llama3_lora_sft
+
+# 任务阶段配置：指定为SFT（有监督微调）阶段的预测任务
+stage: sft                  # 阶段：sft（有监督微调），固定值
+do_predict: true            # 开启预测模式（NLG评估本质是预测+指标计算）
+finetuning_type: lora       # 与训练时的微调类型一致
+
+# 数据集配置：指定评估数据集与预处理策略
+
+eval_dataset: identity,alpaca_en_demo  # 评估数据集：identity（身份提示）+alpaca_en_demo（Alpaca英文对话集）
+template: llama3                       # 模板：与模型匹配，Llama 3用llama3模板
+cutoff_len: 2048                      # 文本截断长度：避免输入过长，Llama 3-8B建议设为2048
+max_samples: 50                       # 评估样本数量：取50个样本（平衡评估速度与结果代表性）
+overwrite_cache: true                 # 覆盖缓存：若数据集预处理逻辑修改，需设为true
+preprocessing_num_workers: 16         # 预处理线程数：根据CPU核心数调整，16核CPU设为16
+# 评估与生成配置：关键参数影响生成质量与指标准确性
+
+per_device_eval_batch_size: 2  # 单设备评估批量
+predict_with_generate: true    # 开启生成模式：必须设为true，否则只输出日志不生成文本
+ddp_timeout: 180000000         # DDP超时时间：避免多GPU评估时超时（单位：微秒）
+max_new_tokens: 256          # 最大生成 tokens 数：根据任务调整，对话任务建议256
+temperature: 0.7             # 温度：控制生成随机性，0.7为平衡流畅度与多样性的常用值
+top_p: 0.9                   # 核采样：仅保留累计概率≥0.9的token，避免生成无意义文本
+
+
+# 输出配置：预测结果与指标保存路径
+
+output_dir: saves/llama3-8b/lora/nlg_predict  # 保存路径（含预测文本与指标）
+overwrite_output_dir: true                   # 覆盖旧输出：避免路径已存在报错
+
