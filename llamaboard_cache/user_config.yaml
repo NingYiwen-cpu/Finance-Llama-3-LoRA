@@ -1,0 +1,6 @@
+cache_dir: null
+hub_name: huggingface
+lang: zh
+last_model: Llama-3-8B-Instruct
+path_dict:
+  Llama-3-8B-Instruct: /data/nyw/homework/LLM_LZC/LLaMA-Factory/output/llama3_lora_sft
